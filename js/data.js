@@ -61,5 +61,6 @@ const createCard = () => ({
 });
 
 const createCards = () => Array.from({length: SIMILAR_CARDS_COUNT}, createCard);
+createCards();
 
 export {createCards};
