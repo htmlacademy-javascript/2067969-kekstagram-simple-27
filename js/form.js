@@ -35,7 +35,7 @@ imgEditFormClose.addEventListener('click', () => {
 
 const form = document.querySelector('.img-upload__form');
 
-const pristine = new Pristine(form,{
+const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextClass: 'img-upload__error-text'
@@ -43,11 +43,10 @@ const pristine = new Pristine(form,{
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-
   const isValid = pristine.validate();
   if (isValid) {
-    console.log('Форма валидна');
-  } else {
-    console.log('Форма невалидна');
-  }
+    fetch('https://27.javascript.pages.academy/kekstagram-simple', {
+      method: 'POST',
+      body: form
+    });}
 });
