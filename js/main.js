@@ -3,3 +3,5 @@ createCards(); // потому что lint ругается, как этого �
 // console.log(createCards());
 import './picture.js';
 import './form.js';
+import './scale.js';
+import './effects.js';
