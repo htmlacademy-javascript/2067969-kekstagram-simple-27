@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
+import {resetEffects} from './effects.js';
 
 const uploadFileControl = document.querySelector('#upload-file');
 const imgEditFormOpen = document.querySelector('.img-upload__overlay');
@@ -19,6 +21,8 @@ function openImgEditForm () {
 }
 
 function closeImgEditForm () {
+  resetEffects();
+  resetScale();
   imgEditFormOpen.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
