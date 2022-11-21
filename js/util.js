@@ -1,8 +1,3 @@
-// function checkStringLength (string, length) {
-//   return string.length <= length;
-// }
-
-// checkStringLength();
 
 function getRandomIntInclusive(min, max) {
   if (min < 0 || max < 0) {
@@ -17,6 +12,4 @@ const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, el
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomArrayElement};
-export {getRandomIntInclusive};
-export {isEscapeKey};
+export {getRandomArrayElement, getRandomIntInclusive, isEscapeKey};
