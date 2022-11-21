@@ -7,6 +7,9 @@ import {resetEffects} from './effects.js';
 const uploadFileControl = document.querySelector('#upload-file');
 const imgEditFormOpen = document.querySelector('.img-upload__overlay');
 const imgEditFormClose = document.querySelector('#upload-cancel');
+const uploadSubmitControl = document.querySelector('#upload-submit');
+const form = document.querySelector('.img-upload__form');
+
 
 const onEditFormEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -39,19 +42,26 @@ imgEditFormClose.addEventListener('click', () => {
   closeImgEditForm ();
 });
 
-const form = document.querySelector('.img-upload__form');
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextClass: 'img-upload__error-text'
 });
 
-const setFormSubmit = () => {
+const blockSubmitControl = () => {
+  uploadSubmitControl.disabled = true;
+};
+
+const unblockSubmitControl = () => {
+  uploadSubmitControl.disabled = false;
+};
+
+const setFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
+      blockSubmitControl();
       const formData = new FormData(evt.target);
       fetch('https://27.javascript.pages.academy/kekstagram-simple',
         {
@@ -60,16 +70,19 @@ const setFormSubmit = () => {
         },
       ).then ((response) => {
         if (response.ok) {
+          onSuccess();
           showSuccessMessage();
-        // } else {
-        //   showErrorMessage();
+          unblockSubmitControl();
+        } else {
+          showErrorMessage();
+          unblockSubmitControl();
         }
       }).catch (() => {
         showErrorMessage();
+        unblockSubmitControl();
       });
     }
   });
 };
-
 
 export {setFormSubmit, openImgEditForm, closeImgEditForm};
