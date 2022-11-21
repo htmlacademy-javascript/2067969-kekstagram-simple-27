@@ -1,21 +1,4 @@
-// function checkStringLength (string, length) {
-//   return string.length <= length;
-// }
-
-// checkStringLength();
-
-function getRandomIntInclusive(min, max) {
-  if (min < 0 || max < 0) {
-    return NaN;
-  }
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
-
-const isEscapeKey = (evt) => evt.key === 'Escape';
+import {isEscapeKey} from './util.js';
 
 const successMessageContainer = document.querySelector('.success');
 const successButton = document.querySelector('.success__button');
@@ -49,9 +32,6 @@ const showErrorMessage = () => {
   document.body.appendChild(errorMessage);
 };
 
-export {getRandomArrayElement};
-export {getRandomIntInclusive};
-export {isEscapeKey};
 export {showSuccessMessage};
 export {showErrorMessage};
 
