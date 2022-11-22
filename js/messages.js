@@ -6,7 +6,7 @@ const onSuccessEscKeydown = (evt) => {
     closeSuccessMessage();
   }
 };
-// При нажатии на Esc закрывает и сообщение и форму, как можно это исправить?
+
 const onErrorEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -19,7 +19,6 @@ const showSuccessMessage = () => {
   document.body.appendChild(successMessage);
 
   document.querySelector('.success').addEventListener('click', (evt) => {
-    // evt.target - это место куда нажал пользователь, нужно проверять кнопка это или нет
     if (evt.target.closest('.success__inner') === null || evt.target.closest('.success__button')) {
       closeSuccessMessage();
     }

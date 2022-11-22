@@ -10,7 +10,6 @@ const imgEditFormClose = document.querySelector('#upload-cancel');
 const uploadSubmitControl = document.querySelector('#upload-submit');
 const form = document.querySelector('.img-upload__form');
 
-
 const onEditFormEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
