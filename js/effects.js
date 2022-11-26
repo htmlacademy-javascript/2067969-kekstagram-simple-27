@@ -2,64 +2,59 @@ const preview = document.querySelector('.img-upload__preview img');
 const form = document.querySelector('.img-upload__form');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
+const effectLevelContainer = document.querySelector('.img-upload__effect-level');
 
-
-const EFFECTS = [
-  {
-    name: 'none',
+const EFFECTS = {
+  none: {
     min: 0,
     max: 100,
     step: 1,
   },
-  {
-    name: 'chrome',
+  chrome: {
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: '',
     style: 'grayscale',
+  },
+  sepia: {
     min: 0,
     max: 1,
     step: 0.1,
     unit: '',
-  },
-  {
-    name: 'sepia',
     style: 'sepia',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    unit: '',
   },
-  {
-    name: 'marvin',
-    style: 'invert',
+  marvin: {
     min: 0,
     max: 100,
     step: 1,
     unit: '%',
+    style: 'invert',
   },
-  {
-    name: 'phobos',
-    style: 'blur',
+  phobos: {
     min: 0,
     max: 3,
     step: 0.1,
     unit: 'px',
+    style: 'blur',
   },
-  {
-    name: 'heat',
-    style: 'brightness',
+  heat: {
     min: 1,
     max: 3,
     step: 0.1,
     unit: '',
-  },
-];
+    style: 'brightness',
+  }
+};
 
-const DEFAULT_EFFECT = EFFECTS[0];
+
+const DEFAULT_EFFECT = EFFECTS['none'];
 let usedEffect = DEFAULT_EFFECT;
 
 const isDefault = () => usedEffect === DEFAULT_EFFECT;
 
 const updateSlider = () => {
-  sliderElement.classList.remove('hidden'); //зачем?
+  sliderElement.classList.remove('hidden');
   sliderElement.noUiSlider.updateOptions({
     range: {
       min: usedEffect.min,
@@ -68,17 +63,14 @@ const updateSlider = () => {
     step: usedEffect.step,
     start: usedEffect.max,
   });
-
-  if (isDefault()) {
-    sliderElement.classList.add('hidden');
-  }
+  effectLevelContainer.classList.toggle('hidden', isDefault());
 };
 
 const onFormChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  usedEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  usedEffect = EFFECTS[evt.target.value];
   updateSlider();
 };
 

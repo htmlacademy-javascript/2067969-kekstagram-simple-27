@@ -1,9 +1,6 @@
-// import {createCards} from './data.js'; // ЭТО УДАЛИТЬ?
-
 const pictureContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content;
 const newPictureTemplate = pictureTemplate.querySelector('.picture');
-// const pictureItems = createCards(); // ЭТО УДАЛИТЬ?
 
 const renderPictureList = (pictureItems) => {
   const pictureContainerFragment = document.createDocumentFragment();
