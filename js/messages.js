@@ -15,7 +15,7 @@ const onErrorEscKeydown = (evt) => {
 };
 
 const showSuccessMessage = () => {
-  const successMessage = document.querySelector('#success').content;
+  const successMessage = document.querySelector('#success').content.cloneNode(true);
   document.body.appendChild(successMessage);
 
   document.querySelector('.success').addEventListener('click', (evt) => {
@@ -34,7 +34,7 @@ function closeSuccessMessage () {
 }
 
 const showErrorMessage = () => {
-  const errorMessage = document.querySelector('#error').content;
+  const errorMessage = document.querySelector('#error').content.cloneNode(true);
   document.body.appendChild(errorMessage);
 
   document.querySelector('.error').addEventListener('click', (evt) => {

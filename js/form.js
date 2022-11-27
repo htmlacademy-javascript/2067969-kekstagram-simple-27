@@ -2,6 +2,7 @@ import {isEscapeKey} from './util.js';
 import {showSuccessMessage, showErrorMessage} from './messages.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effects.js';
+import {URL} from './const.js';
 
 
 const uploadFileControl = document.querySelector('#upload-file');
@@ -10,26 +11,26 @@ const imgEditFormClose = document.querySelector('#upload-cancel');
 const uploadSubmitControl = document.querySelector('#upload-submit');
 const form = document.querySelector('.img-upload__form');
 
-const onEditFormEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+function onEditFormEscKeydown (evt) {
+  if (isEscapeKey(evt) && !document.querySelector('.error'))
+  {
     evt.preventDefault();
     closeImgEditForm ();
   }
-};
+}
 
 function openImgEditForm () {
   imgEditFormOpen.classList.remove('hidden');
   document.body.classList.add('modal-open');
-
   document.addEventListener('keydown', onEditFormEscKeydown);
 }
 
 function closeImgEditForm () {
+  form.reset();
   resetEffects();
   resetScale();
   imgEditFormOpen.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onEditFormEscKeydown);
 }
 
@@ -47,22 +48,22 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error-text'
 });
 
-const blockSubmitControl = () => {
+function blockSubmitControl () {
   uploadSubmitControl.disabled = true;
-};
+}
 
-const unblockSubmitControl = () => {
+function unblockSubmitControl () {
   uploadSubmitControl.disabled = false;
-};
+}
 
-const setFormSubmit = (onSuccess) => {
+function setFormSubmit (onSuccess) {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitControl();
       const formData = new FormData(evt.target);
-      fetch('https://27.javascript.pages.academy/kekstagram-simple',
+      fetch(URL,
         {
           method: 'POST',
           body: formData,
@@ -82,6 +83,6 @@ const setFormSubmit = (onSuccess) => {
       });
     }
   });
-};
+}
 
 export {setFormSubmit, openImgEditForm, closeImgEditForm};
